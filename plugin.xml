@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-nfc-reader-simtech"
+        version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+        xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>NfcReader</name>
+  <description>
+    Cordova plugin for reading NFC block for nfcv and mifare.
+  </description>
+  <license>SIMTECH</license>
+  <keywords>nfc, nfcv, cordova, mifare</keywords>
+
+  <js-module name="NfcReader" src="www/NfcReader.js">
+    <clobbers target="cordova.plugins.NfcReader" />
+  </js-module>
+  <!-- android -->
+  <platform name="android">
+    <!-- config -->
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="NfcReader">
+        <param name="android-package" value="com.cordova.NfcReader"/>
+        <param name="onload" value="true"/>
+      </feature>
+      <preference name="AndroidLaunchMode" value="singleTask"/>
+    </config-file>
+    <!-- source -->
+    <source-file src="src/android/NfcVPlugin.java" target-dir="src/nfcReader/plugin"/>
+    <source-file src="src/android/NfcVHandler.java" target-dir="src/nfcReader/plugin"/>
+
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.NFC"/>
+      <uses-feature android:name="android.hardware.nfc" android:required="false"/>
+    </config-file>
+  </platform>
+</plugin>
